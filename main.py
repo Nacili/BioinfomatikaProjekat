@@ -2,32 +2,27 @@ import DTree
 import KNeighbors
 import Gaussian
 import MLP
-import SVM
 import CleanOriginal
 import SeparateChromosomes
 import DefineGenes
 import MergeChromosomes
-#import warnings
 
-#def fxn():
-#    warnings.warn("deprecated", DeprecationWarning)
-#
-#with warnings.catch_warnings():
-#    warnings.simplefilter("ignore")
-#    fxn()
+print('Da li želite da preskočite preprocesiranje? (y/n)\nProcenjeno vreme trajanja: 2h')
+odg = input('')
+if odg == 'y':
+    print ('Preprocesiranje podataka u toku...')
 
-print ('Preprocesiranje podataka u toku...')
+    print('\t* Odstranjivanje suvisnih klasa')
+    CleanOriginal.Clean()
+    print('\t* Razvrstavanje hromozoma')
+    SeparateChromosomes.SeparateChromosomes()
+    print('\t* Definisanje gena')
+    DefineGenes.DefineGenes()
+    print('\t Grupisanje hromozoma')
+    MergeChromosomes.MergeChromosomes()
+    
+    print('Preporocesiranje zavrseno. Podaci se nalaze u "preprocessed.xlsx".')
 
-print('\t* Odstranjivanje suvisnih klasa')
-CleanOriginal.Clean()
-print('\t* Razvrstavanje hromozoma')
-SeparateChromosomes.SeparateChromosomes()
-print('\t* Definisanje gena')
-DefineGenes.DefineGenes()
-print('\t Grupisanje hromozoma')
-MergeChromosomes.MergeChromosomes()
-
-print('Preporocesiranje zavrseno. Podaci se nalaze u "preprocessed.xlsx".')
 
 # ////////////////////////////////////////////////////
 
@@ -39,10 +34,9 @@ while True:
     print('\t2. K najblizih suseda')
     print('\t3. Gausova raspodela')
     print('\t4. Neuronske mreze')
-    print('\t5. Potporni vektori')
     while True:
         metoda = int(input(''))
-        if metoda in (1, 2, 3, 4, 5):
+        if metoda in (1, 2, 3, 4):
             break
         else:
             print('Neispravna opcija')
@@ -62,8 +56,7 @@ while True:
         print('Odabrali ste analizu metodom neuronskih mreža')
         MLP.MLP(data)
     else:
-        print('Odabrali ste analizu metodom potpornih vektora')
-        SVM.SVM(data)
+        print('Neispravna opcija')
         
     metoda = input('Zelite li da isprobate drugu metodu? (y/n)')
     if metoda == 'n':
