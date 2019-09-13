@@ -1,13 +1,37 @@
 import DTree
-import KNeighboors
+import KNeighbors
 import Gaussian
 import MLP
 import SVM
+import CleanOriginal
+import SeparateChromosomes
+import DefineGenes
+import MergeChromosomes
+#import warnings
+
+#def fxn():
+#    warnings.warn("deprecated", DeprecationWarning)
+#
+#with warnings.catch_warnings():
+#    warnings.simplefilter("ignore")
+#    fxn()
 
 print ('Preprocesiranje podataka u toku...')
-data = ''
-print('Podaci nad kojima se vrsi istrazivanje:')
-print(data)
+
+print('\t* Odstranjivanje suvisnih klasa')
+CleanOriginal.Clean()
+print('\t* Razvrstavanje hromozoma')
+SeparateChromosomes.SeparateChromosomes()
+print('\t* Definisanje gena')
+DefineGenes.DefineGenes()
+print('\t Grupisanje hromozoma')
+MergeChromosomes.MergeChromosomes()
+
+print('Preporocesiranje zavrseno. Podaci se nalaze u "preprocessed.xlsx".')
+
+# ////////////////////////////////////////////////////
+
+data = 'preprocessed.xlsx'
 
 while True:
     print('Odaberite zeljenu metodu:')
@@ -26,15 +50,20 @@ while True:
             print('--------------------------------------------------------')
 
     if metoda == 1:
-        DTree(data)
+        print('Odabrali ste analizu metodom drveta odlučivanja')
+        DTree.DTree(data)
     elif metoda == 2:
-        KNeighboors(data)
+        print('Odabrali ste analizu metodom k najbližih suseda')
+        KNeighbors.KNeighboors(data)
     elif metoda == 3:
-        Gaussian(data)
+        print('Odabrali ste analizu Gausovom metodom')
+        Gaussian.Gaussian(data)
     elif metoda == 4:
-        MLP(data)
+        print('Odabrali ste analizu metodom neuronskih mreža')
+        MLP.MLP(data)
     else:
-        SVM(data)
+        print('Odabrali ste analizu metodom potpornih vektora')
+        SVM.SVM(data)
         
     metoda = input('Zelite li da isprobate drugu metodu? (y/n)')
     if metoda == 'n':

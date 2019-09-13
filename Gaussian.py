@@ -2,9 +2,8 @@ import pandas as pd
 from sklearn.naive_bayes import  GaussianNB
 from sklearn.model_selection import train_test_split
 import sklearn.metrics as met
-import numpy as np
 
-def Gauss(data):
+def Gaussian(data):
     df = pd.read_excel(data)
     features1 = df.columns[1:2].tolist()
     features2 = df.columns[6:].tolist()

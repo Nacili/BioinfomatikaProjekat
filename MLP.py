@@ -3,7 +3,6 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn import preprocessing
 import sklearn.metrics as met
-import numpy as np
 
 def MLP(data):
 
@@ -34,20 +33,23 @@ def MLP(data):
     clf = GridSearchCV(MLPClassifier(), params, cv=5)
     clf.fit(x_train, y_train)
 
+   
     print("Izvestaj za test skup:")
     y_true, y_pred = y_test, clf.predict(x_test)
     cnf_matrix = met.confusion_matrix(y_test, y_pred)
     print("Matrica konfuzije", cnf_matrix, sep="\n")
     print("\n")
-
+    
     accuracy = met.accuracy_score(y_test, y_pred)
     print("Preciznost", accuracy)
     print("\n")
-
+    
     class_report = met.classification_report(y_test, y_pred, target_names=clf.classes_)
     print("Izvestaj klasifikacije", class_report, sep="\n")
-
+    
     print('Broj iteracija: ', clf.best_estimator_.n_iter_)
     print('Broj slojeva: ', clf.best_estimator_.n_layers_)
     print('Koeficijenti:', clf.best_estimator_.coefs_, sep='\n')
-    print('Bias:', clf.best_estimator_.intercepts_, sep='\n')
+    #print('Bias:', clf.best_estimator_.intercepts_, sep='\n')
+    print('Skriveni slojevi:', clf.best_estimator_.hidden_layer_sizes, sep='\n')
+    print('Aktivaciona funkcija:', clf.best_estimator_.activation, sep='\n')

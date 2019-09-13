@@ -7,7 +7,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 
 def SVM(data):
-    df = pd.read_csv(data)
+    df = pd.read_excel(data)
     features1 = df.columns[1:2].tolist()
     features2 = df.columns[6:].tolist()
     features = features1 + features2
